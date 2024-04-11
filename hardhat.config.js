@@ -1,7 +1,17 @@
 require("@nomiclabs/hardhat-ethers");
+task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
+  const accounts = await hre.ethers.getSigners();
+  for (const account of accounts) {
+    const address=await account.getAddress();
+    const balance=await account.getBalance();
+
+    console.log(account);
+    console.log(address + ":"+ hre.ethers.utils.formatEther(balance));
+  }
+});
 module.exports = {
-  solidity: "0.8.20",
-  defaultNetwork: "sepolia",
+  solidity: "0.8.24",
+  defaultNetwork: "hardhat",
   networks: {
     hardhat: {},
     sepolia: {
@@ -10,6 +20,9 @@ module.exports = {
     },
   },
   paths:{
+    sources:"./contracts",
+    tests:"./test",
+    cache:"./cache",
     artifacts:"./client/src/artifacts",
   }
 };
