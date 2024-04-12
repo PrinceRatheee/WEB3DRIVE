@@ -14,7 +14,7 @@ function App() {
   const [modalOpen, setModalOpen] = useState("");
 
   useEffect(() => {
-    const provider = new ethers.BrowserProvider(window.ethereum);  // provider for metamask
+    const provider = new ethers.providers.Web3Provider(window.ethereum);  // provider for metamask
     const loadProvider = async () => {
       if (provider) {
         window.ethereum.on("chainChanged", () => {
